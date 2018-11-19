@@ -44,8 +44,8 @@ TC=/sbin/tc
 ########################################
 
 if [ -n "$2" ]; then
-  DELAY=$2
-  echo "DELAY : $DELAY ms"
+  BANDWITH="$2kbit"
+  echo "BANDWITH : $BANDWITH"
 fi
 
 if [ -n "$3" ]; then
@@ -53,6 +53,15 @@ if [ -n "$3" ]; then
   echo "LOSS : $PERCENTLOSS"
 fi
 
+if [ -n "$4" ]; then
+  DELAY=$4
+  echo "DELAY : $DELAY ms"
+fi
+
+if [ -n "$5" ]; then
+  VAR=$5
+  echo "DELAY VAR : $VAR ms"
+fi
 
 do_start() {
 
@@ -138,7 +147,7 @@ case "$1" in
     do_status
     ;;
   *)
-    echo "Usage : lagfactory.sh start|stop [ \$DELAY [ \$LOSS ] ]"
-    echo "  DELAY in ms, LOSS in %"
+    echo "Usage : lagfactory.sh start|stop [ \$BANDWITH [ \$LOSS [ \$DELAY [ \$VAR ] ] ] ]"
+    echo "  BANDWITH in kbit, LOSS in %, DELAY in ms, VAR in ms"
     ;;
 esac
